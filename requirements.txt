@@ -1,0 +1,10 @@
+#pip install -r requirements.txt
+# web VM(django container) need to pip install following packages
+Django==4.2.2 # web framework
+psycopg2-binary==2.8.7 # for postgresql
+elasticsearch-dsl==7.6.1 # for elasticsearch
+djangorestframework==3.11.2# for restful api
+pyexcel==0.6.3 # for excel
+pyexcel-io==0.6.3# for excel
+django-cors-headers==3.6.0# for cors
+
