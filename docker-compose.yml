@@ -30,5 +30,14 @@ services:
       - esdata:/usr/share/elasticsearch/data
     environment:
       - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms2g -Xmx2g
     ports:
       - "9200:9200"
+
+  kibana:
+    image: kibana:7.6.2
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5601:5601"
+
