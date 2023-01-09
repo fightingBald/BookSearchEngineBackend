@@ -2,7 +2,7 @@
 # web VM(django container) need to pip install following packages
 Django
 psycopg2-binary
-elasticsearch-dsl
+django_elasticsearch_dsl
 djangorestframework
 pyexcel
 pyexcel-io
