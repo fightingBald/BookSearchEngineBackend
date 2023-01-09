@@ -2,7 +2,6 @@ version: '3'
 volumes:
   pgdata: {}
   esdata: {}
-
 services:
   web:
     build:
