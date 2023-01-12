@@ -24,7 +24,7 @@ def search_by_keyword(keyword):
         operator="and"
     )
     # Execute the search
-    response = s.query(query).execute()  # Execute the search
+    response = list(s.query(query).scan())
     # Return the results
     return response
 
@@ -36,22 +36,10 @@ def search_by_keyword(keyword):
 # rather than the entire text field.
 def search_by_regex(regex):
     s = create_connection_to_index_books()
-    #index the first 1000 words of the text field for each book and then use the search_by_regex(regex) function to search on that indexed subset.
-    # Create the query
-    query = Q(
-        "regexp",
-        text={
-            "value": regex,
-            "flags": "ALL",
-            "max_determinized_states": 10000,
-            "rewrite": "constant_score"
-        }
-    )
-    # Execute the search
-    response = s.query(query).execute() #Execute the search
+    query = Q("query_string", query=regex, default_field='text', analyze_wildcard=True, minimum_should_match=1)
+    response = list(s.query(query).scan())
     # Return the results
     return response
-
 
 
 

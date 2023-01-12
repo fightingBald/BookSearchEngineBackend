@@ -1,12 +1,13 @@
-# _*_ coding : utf-8 _ * _ 
-# @Time : 09/01/2023 12:46
-# @Author : Huayi TANG
-# File : documents.py
+
+# File : books/documents.py
 # @Project : searchEngine
 
 from django_elasticsearch_dsl import Index , Document
 
 from .models import Book
+
+
+
 
 # Name of the Elasticsearch index
 books = Index('books')
@@ -25,8 +26,6 @@ class BookDocument(Document):#Class
             'bookshelf',
             'text',
         ]
-
-    #mapping = {'properties': {'text': {'type': 'keyword'}}}
 
 
 

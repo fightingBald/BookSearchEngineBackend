@@ -17,3 +17,7 @@ RUN sed -i 's/\r//' /start
 RUN chmod +x /start
 
 WORKDIR /app
+
+
+
+

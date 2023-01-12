@@ -23,6 +23,6 @@ urlpatterns = [
     #GET /search?q=<keyword>
     path("api/search/", BookListView.as_view() , name="search"),
     #GET /suggestion?book_id=<book_id>
-    path("api/suggestion/", BookSuggestionView.as_view() , name="suggestion"),
+    path("api/recommendations/", BookSuggestionView.as_view() , name="suggestion"),
 
 ]

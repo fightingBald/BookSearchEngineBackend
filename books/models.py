@@ -1,6 +1,6 @@
 from django.db import models
 
-# talks/models.py
+#PATH: books/models.py
 from pyexcel import get_sheet
 from django.db import models
 
