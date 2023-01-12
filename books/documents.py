@@ -26,7 +26,7 @@ class BookDocument(Document):#Class
             'text',
         ]
 
-    mapping = {'properties': {'text': {'type': 'keyword'}}}
+    #mapping = {'properties': {'text': {'type': 'keyword'}}}
 
 
 
