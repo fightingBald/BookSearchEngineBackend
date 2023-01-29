@@ -1,4 +1,8 @@
 from rest_framework import generics
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from .kmp import KMPSearch
 from .models import Book
 from .serializers import BookSerializer
 from .search import search_by_keyword , search_by_regex, search_by_suggestion
@@ -27,3 +31,24 @@ class BookSuggestionView(generics.ListAPIView):
         if book_id:
             return search_by_suggestion(book_id)
         return super().get_queryset()
+
+
+
+
+class SearchView(generics.ListAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    def get_queryset(self):
+        q = self.request.query_params.get('q')
+        if q:
+            results = []
+            for book in Book.objects.all():
+                if KMPSearch(q, book.text):
+                    results.append(book)
+            return results
+        return  super().get_queryset()
+
+
+
+
+

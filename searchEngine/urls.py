@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path , include
 
-from books.views import BookListView , BookSuggestionView
+from books.views import BookListView , BookSuggestionView,SearchView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -24,5 +24,7 @@ urlpatterns = [
     path("api/search/", BookListView.as_view() , name="search"),
     #GET /suggestion?book_id=<book_id>
     path("api/recommendations/", BookSuggestionView.as_view() , name="suggestion"),
+
+    path("schoolsearch/", SearchView.as_view() , name="schoolsearch"),
 
 ]
