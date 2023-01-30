@@ -31,22 +31,6 @@ class Book(models.Model):
     def search_by_keyword(cls, keyword):
         return cls.objects.filter(title__icontains=keyword) | cls.objects.filter(author__icontains=keyword) | cls.objects.filter(bookshelf__icontains=keyword) | cls.objects.filter(text__icontains=keyword)
 
-    @classmethod
-    def search_by_regex(cls, regex):
-        return cls.objects.filter(text__iregex=regex)
-
-    @classmethod
-    def search_by_suggestion(cls, book_id):
-        book = cls.objects.get(id=book_id)
-        return cls.objects.filter(text__icontains=book.text[:100])
-
-    @classmethod
-    def search_by_suggestion(cls, book_id):
-        book = cls.objects.get(id=book_id)
-        return cls.objects.filter(text__icontains=book.text[:100])
-
-    @classmethod
-
 '''
 
 
