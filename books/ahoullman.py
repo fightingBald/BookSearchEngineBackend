@@ -26,12 +26,12 @@ class Ahoullman:
                 return True
         return False
 
-    def all_words_that_match_pattern(self, p, long_text: str)->list:
+    def occurences_that_match_pattern(self, p, long_text: str)->int:
         long_text_index_list = long_text.split(' ')
-        result = []
+        result = 0
         for word in long_text_index_list:
             if self.match(p, word):
-                result.append(word)
+                result += 1
         return result
     def match(self, p, s):
 
