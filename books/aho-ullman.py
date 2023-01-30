@@ -19,7 +19,20 @@ def append_B_to_A(elem_A, elem_B):
 
 
 class Ahoullman:
+    def if_could_find_pattern(self, p, long_text: str)->bool:
+        long_text_index_list = long_text.split(' ')
+        for word in long_text_index_list:
+            if self.match(p, word):
+                return True
+        return False
 
+    def all_words_that_match_pattern(self, p, long_text: str)->list:
+        long_text_index_list = long_text.split(' ')
+        result = []
+        for word in long_text_index_list:
+            if self.match(p, word):
+                result.append(word)
+        return result
     def match(self, p, s):
 
         if isinstance(p, Ahoullman.NFA):
