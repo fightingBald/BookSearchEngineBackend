@@ -8,12 +8,6 @@ from .models import Book
 from .serializers import BookSerializer
 from .search import search_by_keyword , search_by_regex, search_by_suggestion
 
-import logging.config
-
-logging.config.fileConfig('logging.conf')
-# create logger
-logger = logging.getLogger('daarlogger')
-# Create your views here.
 
 class BookListView(generics.ListAPIView):
     queryset = Book.objects.all()
@@ -34,9 +28,9 @@ class BookSuggestionView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     def get_queryset(self):
-        book_id = self.request.query_params.get('book_id')
-        if book_id:
-            return search_by_suggestion(book_id)
+        book_name = self.request.query_params.get('book_name')
+        if book_name:
+            return search_by_suggestion(book_name)
         return super().get_queryset()
 
 

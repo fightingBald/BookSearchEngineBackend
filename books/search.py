@@ -44,8 +44,16 @@ def search_by_regex(regex):
 
 
 
-def search_by_suggestion(book_id):
+def search_by_suggestion(book_title):
     s = create_connection_to_index_books()
+    query = Q(
+        "match",
+        title=book_title
+    )
+    book = s.query(query).execute()[0]
+    print(book.title)
+    book_id = book.meta.id
+    print(book_id)
     # Create the query
     query = Q(
         "more_like_this",
@@ -55,7 +63,7 @@ def search_by_suggestion(book_id):
         max_query_terms=12,
     )
     # Execute the search
-    response = s.query(query).execute()[1:6] #Execute the search
+    response = s.query(query).execute()[0:5] #Execute the search
     # Return the results
     return response
 
