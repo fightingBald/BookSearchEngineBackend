@@ -1,3 +1,7 @@
+**For The Presentation of the project  pls refer to projectPresentation.pdf**
+**The Demo Video of the project is avilable by this link https://youtu.be/UqAJGebtyto **
+
+
 **Setting up the project**
 
 Our project will use PostgreSQL as a relational database, Elasticsearch and Django. The simplest way to set up everything is to use Docker.  we will have 3 containers. One for PostgreSQL, one for Elasticsearch and one for Django web application.
