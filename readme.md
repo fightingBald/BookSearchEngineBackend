@@ -1,12 +1,9 @@
 # BOOK SEARCH ENGINE BASE ON ACADEMIC ALGO & ELASTICSEACH(REGEX FULLTEXT SEARCH,RECOMMANDATION SYSTEME)
-
-
 **Table of contents**
 
 # Video has Uploaded to Youtube
 
 [https://youtu.be/UqAJGebtyto](https://youtu.be/UqAJGebtyto)
-
 
 
 # General architecture of our project
@@ -77,42 +74,17 @@ In matter off fact apply the KMP and Ahoullman  in such a huge dataset is so cos
 
 # API CONVENTION AND JSON OBJECT FORMAT
 
-| Feature  | base URL elastic search(GET Method by defaullt) | base URL School Algo(GET Method by defaullt)
-DONT ALLOW ANY SPACES
- | Features |
-| --- | --- | --- | --- |
-| project BASE API | http://localhost:8000/api | http://127.0.0.1:8000/schoolsearch/?q=sleep |  BASE URL |
-| Search by keyword: | GET /search?q=<keyword>  | GET /search?q=<keyword>  | Explicit feature “Search” : 
-allow you to search for documents by keyword. The q
- query parameter should contain the keyword to search for. The response should be a list of documents whose index table contains the keyword. |
-| Search by RegEx: | GET /search?regex=<regular_expression> | GET /search?regex=<regular_expression> | — Explicit feature “Advanced search” : 
-search for documents using a regular expression. The regex query parameter should contain the regular expression to search for. The response should be a list of documents that contain a string matching the regular expression in their index table. |
-| Recommendations based on book_name
-
-Reommand top 5 Book that content similar to the given_book_name book’s content  | GET /recommendations?book_name=<book name> | GET /school_recommendations?book_name=<book name> | — Emplicit feature of recommendation : 
-Suggestion of documents with a content similar to the Indiacted Book Name. 
-
-return the top 5 books objects that contents similar to the indicated name book. |
-
-```json
-{
-            "title": "Domestic Animals",
-            "author": "Richard Lamb Allen",
-            "link": "http://www.gutenberg.org/ebooks/34175",
-            "bookshelf": "Animals-Domestic",
-            "text": "file was produced from imaxxxxxxx +16000 words"
-},
-```
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%202.png)
 
 # Visual Display
 
 Our Mainpage(check the box to launch the regex search)
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%202.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%203.png)
 
 And click on the recommendation buttuon to  get the top 5 similar books
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%203.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%204.png)
 
 # Problem statement and our solution also algorithm explanation:
 
@@ -150,7 +122,7 @@ We’ve  used the python `requests` and `BeautifulSoup` to crawls and retrieves 
 
 The code has a limit of 1664 books to retrieve, which can be adjusted by changing the **`DATASET_SIZE`** value. After retrieving the book information, the code cleans up the text by removing newlines, carriage returns, tabs, and other funny tokens using the **`clean_text`** function. The cleaned text is then stored in a dictionary named **`data`** along with the other information. Finally, the data is stored in a Pandas dataframe , and stores in form of a csv file `gutenberg_data.csv`
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%204.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%205.png)
 
 > Down load the full dataset with the following link through our google drive if you want to avoid to run the whole scipts on your machine :)
 https://drive.google.com/file/d/1vZzlSnYT3yakErkdw8yCoA94omwuVqdS/view?usp=sharing
@@ -165,7 +137,7 @@ Once the full dataset is in the local desktop, we’ve populate this data into p
 
 This is in the Django container
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%205.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%206.png)
 
 ## index some parts of the data from relational database into Elasticsearch container
 
@@ -173,7 +145,7 @@ This is in the Django container
 
 Using httpie  or `curl -X GET "localhost:9200/books/_search?pretty"`
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%206.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%207.png)
 
 ## **Explicit feature “Search”**
 
@@ -186,15 +158,15 @@ Using httpie  or `curl -X GET "localhost:9200/books/_search?pretty"`
 
 We(’ve defined the search API `search_by_keyword` in `[search.py](http://search.py)` packing our query.
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%207.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%208.png)
 
 And then in `[views.py](http://views.py)` we’ve defined a `BookListView` and for the coming `request , we get the value of parameter 'q`' as the key word that user input, then we use the`search_by_keyword` API to sent the query to elastic search container and rerturn the results
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%208.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%209.png)
 
 Here is the example of the result
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%209.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2010.png)
 
 ### Our Own algo-`books/kmp.py`
 
@@ -208,19 +180,19 @@ Our implement consists of two functions:
 
 The KMPSearch function takes two inputs, the pattern to be searched and the text in which the pattern is to be searched. The function returns the number of times the pattern occurs in the text. 
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2010.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2011.png)
 
 The computeLPSArray function takes three inputs, the pattern, the length of the pattern and the lps array that holds the longest prefix suffix values for the pattern. The function calculates the lps array that is used in the KMPSearch function.
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2011.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2012.png)
 
 And then in `[views.py](http://views.py)` we’ve defined a `SearchView` and for the coming `request, we get the value of parameter 'q`' as the key word that user input, then we use the `KMPSearch` API filter out the book objects from the `Book.objects.all() that contains the keyword we search`
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2012.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2013.png)
 
 ### Example result that we use our KMP Algo to luanch the seach
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2013.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2014.png)
 
 ## **Explicit feature “Advanced search”**
 
@@ -235,23 +207,23 @@ During the `first bonus project`, we’ve already implement the** `[ahoullman](h
 
 We’ve defined the search API `search_by_regex` in `[search.py](http://search.py)` packing our query.
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2014.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2015.png)
 
 And then in `[views.py](http://views.py)` we’ve defined a `BookListView` and for the coming `request , we get the value of parameter ‘regex'` as the regex pattern that user input, then we use the`search_by_regex` API to sent the query to elastic search container and rerturn the results
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2015.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2016.png)
 
 Here is the example of the result
 
 **`GET** /api/search/?regex=Alive%7Cdead%7Csleep`
-
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2016.png)
 
 ![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2017.png)
 
 ![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2018.png)
 
 ![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2019.png)
+
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2020.png)
 
 ### Our Own algo-`books/ahoullman.py.` tooks hours  for a search among 1664 books
 
@@ -293,7 +265,7 @@ In terms of time efficiency, the NFA scans the test string once. In the worst c
 
 And then in `[views.py](http://views.py)` we’ve defined a `BookSuggestionView` and for the coming `request , we get the value of parameter ‘regex'` as the regex pattern that user input, then we use the`search_by_regex` API to sent the query to elastic search container and rerturn the results
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2020.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2021.png)
 
 ## **Implicit feature of ranking**
 
@@ -309,7 +281,7 @@ according to some mathematical definition of ranking : by decreasing number of o
 
 Both our KMP algo and Ahoullman algo defines the API that return the occurence number of the hit books, so that after we get the hit documents, it could be oreders my the occurences.
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2021.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2022.png)
 
 ## **Explicit feature “recommendation”**
 
@@ -322,15 +294,15 @@ Both our KMP algo and Ahoullman algo defines the API that return the occurence n
 
 We’ve defined the search API `search_by_suggestion` in `[search.py](http://search.py)` packing our query.
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2022.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2023.png)
 
 And then in `[views.py](http://views.py)` we’ve defined a `BookSuggestionView` and for the coming `request , we get the value of parameter '``book_name‘` as the `book_name`that user input, then we use the`search_by_suggestion` API to sent the query to elastic search container and rerturn the results
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2023.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2024.png)
 
 Here is the example of the result
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%209.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2010.png)
 
 ### Our Own algo-`books/jaccard_distance.py`
 
@@ -338,13 +310,13 @@ We defined a class named **`JaccardGraph`**, which creates a graph data structur
 
 The Strategy Jaccard similarity score is used to measure the similarity between two sets of words. In  code, the Jaccard similarity score is calculated between the texts of two books. If the score is greater than 0, it means that the books have some overlapping words, and thus an edge is created between the two books in the graph.
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2024.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2025.png)
 
 We provides two methods for retrieving the top 5 similar books for a given book: **`get_top5_similar_books`**
  takes a book ID as input and returns the 5 books with the highest Jaccard similarity score to the input book. **`get_top5_similar_books_by_title`**
  takes a book title as input and returns the top 5 similar books based on that title.
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2025.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2026.png)
 
 ---
 
@@ -353,7 +325,7 @@ We provides two methods for retrieving the top 5 similar books for a given book:
 > Instead of waiting 6+ hours for 1 test result, we decide to narrow the test dataset down to 10 books, and using jupyterlab to run the algo rythme and check the test result.
 > 
 
-![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2026.png)
+![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2027.png)
 
 - Keyword Search
     
@@ -364,13 +336,13 @@ We provides two methods for retrieving the top 5 similar books for a given book:
     
     Here we could see thats they are exactly the same.
     
-    ![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2027.png)
-    
     ![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2028.png)
     
     ![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2029.png)
     
     ![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2030.png)
+    
+    ![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2031.png)
     
 - Regex search
     
@@ -381,7 +353,7 @@ We provides two methods for retrieving the top 5 similar books for a given book:
     
     Here we could see thats they are exactly the same 
     
-    ![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2031.png)
+    ![Untitled](Project%204%20%E2%80%93%20PRIMARY%20CHOICE%20ce97daa82410478dacfa383bfff189af/Untitled%2032.png)
     
 
 # **Conclusion**
