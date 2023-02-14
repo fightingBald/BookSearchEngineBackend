@@ -4,8 +4,6 @@
 # Video has Uploaded to Youtube
 
 [https://youtu.be/UqAJGebtyto](https://youtu.be/UqAJGebtyto)
-
-
 # General architecture of our project
 
 The application can be accessed from any web browser, whether on mobile or not. 
