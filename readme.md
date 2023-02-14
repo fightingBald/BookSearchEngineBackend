@@ -7,13 +7,7 @@
 
 [https://youtu.be/UqAJGebtyto](https://youtu.be/UqAJGebtyto)
 
-# Author:
 
-Huayi TANG 21101676 Sorbonne M2 RES-INSTA
-
-MOHAMED AZIZ ABDERRAHMEN   3802009 Sorbonne M2 RES-INSTA
-
-Astrid PASSOT 21205135  Sorbonne M2 RES-INSTA
 
 # General architecture of our project
 
