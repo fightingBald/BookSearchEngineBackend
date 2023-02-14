@@ -1,9 +1,5 @@
-# Project 4 – PRIMARY CHOICE
+# BOOK SEARCH ENGINE BASE ON ACADEMIC ALGO & ELASTICSEACH 
 
-<aside>
-💡 **Notion Tip:** Use this template to organize a project kickoff and build out the necessary context. Share this page with other team members by clicking the `Share` button on the top right of this page. Learn more about [sharing & permissions here](https://www.notion.so/help/sharing-and-permissions).
-
-</aside>
 
 **Table of contents**
 
